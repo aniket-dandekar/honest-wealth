@@ -23,9 +23,9 @@
   <!-- google recaptcha -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
-      .g-recaptcha {
-	display: inline-block;
-}
+    .g-recaptcha {
+      display: inline-block;
+    }
   </style>
 
   <!--
@@ -150,63 +150,63 @@ https://templatemo.com/tm-545-finance-business
             </li>
 
             <script>
-              function erDropEff1(){
-                document.getElementById('nav-dropdown-1').className='nav-item dropdown active';
-                document.getElementById("drop-1").style.display="block"
-                if(document.getElementById("drop-2").style.display="block"){
-                  document.getElementById("drop-2").style.display="none";
+              function erDropEff1() {
+                document.getElementById('nav-dropdown-1').className = 'nav-item dropdown active';
+                document.getElementById("drop-1").style.display = "block"
+                if (document.getElementById("drop-2").style.display = "block") {
+                  document.getElementById("drop-2").style.display = "none";
                 }
-                if(document.getElementById("drop-3").style.display="block"){
-                document.getElementById("drop-3").style.display="none";
-                }
-              }
-
-              function erDropEff4(){
-                if(document.getElementById("drop-1").style.display="block"){
-                  document.getElementById("drop-1").style.display="none";
-                  document.getElementById('nav-dropdown-1').className='nav-item dropdown';
+                if (document.getElementById("drop-3").style.display = "block") {
+                  document.getElementById("drop-3").style.display = "none";
                 }
               }
 
-              function erDropEff2(){
-                document.getElementById('nav-dropdown-2').className='nav-item dropdown active';
-                document.getElementById("drop-2").style.display="block"
-                if(document.getElementById("drop-1").style.display="block"){
-                  document.getElementById("drop-1").style.display="none";
-                }
-                if(document.getElementById("drop-3").style.display="block"){
-                document.getElementById("drop-3").style.display="none";
+              function erDropEff4() {
+                if (document.getElementById("drop-1").style.display = "block") {
+                  document.getElementById("drop-1").style.display = "none";
+                  document.getElementById('nav-dropdown-1').className = 'nav-item dropdown';
                 }
               }
 
-              function erDropEff5(){
-                if(document.getElementById("drop-2").style.display="block"){
-                  document.getElementById("drop-2").style.display="none";
-                  document.getElementById('nav-dropdown-2').className='nav-item dropdown';
+              function erDropEff2() {
+                document.getElementById('nav-dropdown-2').className = 'nav-item dropdown active';
+                document.getElementById("drop-2").style.display = "block"
+                if (document.getElementById("drop-1").style.display = "block") {
+                  document.getElementById("drop-1").style.display = "none";
+                }
+                if (document.getElementById("drop-3").style.display = "block") {
+                  document.getElementById("drop-3").style.display = "none";
                 }
               }
 
-              function erDropEff3(){
-                document.getElementById('nav-dropdown-3').className='nav-item dropdown active';
-                document.getElementById("drop-3").style.display="block"
-                if(document.getElementById("drop-1").style.display="block"){
-                  document.getElementById("drop-1").style.display="none";
-                }
-                if(document.getElementById("drop-2").style.display="block"){
-                document.getElementById("drop-2").style.display="none";
+              function erDropEff5() {
+                if (document.getElementById("drop-2").style.display = "block") {
+                  document.getElementById("drop-2").style.display = "none";
+                  document.getElementById('nav-dropdown-2').className = 'nav-item dropdown';
                 }
               }
 
-              function erDropEff6(){
-                if(document.getElementById("drop-3").style.display="block"){
-                  document.getElementById("drop-3").style.display="none";
-                  document.getElementById('nav-dropdown-3').className='nav-item dropdown';
+              function erDropEff3() {
+                document.getElementById('nav-dropdown-3').className = 'nav-item dropdown active';
+                document.getElementById("drop-3").style.display = "block"
+                if (document.getElementById("drop-1").style.display = "block") {
+                  document.getElementById("drop-1").style.display = "none";
+                }
+                if (document.getElementById("drop-2").style.display = "block") {
+                  document.getElementById("drop-2").style.display = "none";
+                }
+              }
+
+              function erDropEff6() {
+                if (document.getElementById("drop-3").style.display = "block") {
+                  document.getElementById("drop-3").style.display = "none";
+                  document.getElementById('nav-dropdown-3').className = 'nav-item dropdown';
                 }
               }
 
             </script>
 
-            <li class="nav-item"  id="nav-btn-s">
+            <li class="nav-item" id="nav-btn-s">
               <a class="nav-link nav-btn" href="cli-login.html">Login</a>
             </li>
 
@@ -261,20 +261,20 @@ https://templatemo.com/tm-545-finance-business
               <script>
                 var recaptcha_response = '';
                 function submitUserForm() {
-                    if(recaptcha_response.length == 0) {
-                        document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:#ffc107;font-weight:500;">This field is required.</span>';
-                        return false;
-                    }
-                    return true;
+                  if (recaptcha_response.length == 0) {
+                    document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:#ffc107;font-weight:500;">This field is required.</span>';
+                    return false;
+                  }
+                  return true;
                 }
-                
+
                 function verifyCaptcha(token) {
-                    recaptcha_response = token;
-                    document.getElementById('g-recaptcha-error').innerHTML = '';
+                  recaptcha_response = token;
+                  document.getElementById('g-recaptcha-error').innerHTML = '';
                 }
               </script>
               <div class="contact-form">
-                <form id="contact"  onsubmit="return submitUserForm();" action="mailer/send_mail.php" method="post">
+                <form id="contact" onsubmit="return submitUserForm();" action="mailer/send_mail.php" method="post">
                   <div id="callback-f" class="row" style="height: 400px;">
                     <div class="col-lg-4 col-md-12 col-sm-12">
                       <fieldset>
@@ -304,7 +304,8 @@ https://templatemo.com/tm-545-finance-business
                       <fieldset>
                         <div id="g-recaptcha-error" style="padding-left: 0px;"></div>
                         <div id="g-capt" class="text-xs-center">
-                            <div class="g-recaptcha" data-sitekey="6Lep7QEhAAAAAPUf067tVNVtBTIdOnDqUhK0J65V" data-callback="verifyCaptcha"></div>
+                          <div class="g-recaptcha" data-sitekey="6Lep7QEhAAAAAPUf067tVNVtBTIdOnDqUhK0J65V"
+                            data-callback="verifyCaptcha"></div>
                         </div>
                       </fieldset>
                     </div>
@@ -331,7 +332,7 @@ https://templatemo.com/tm-545-finance-business
             <i class="fa fa-phone"></i>
             <h4>Phone</h4>
             <p>Call us, We are here to help!</p>
-            <a href="#">+91 8976880783</a>
+            <a href="tel:+919011570451">+91 9011570451</a>
           </div>
         </div>
         <div class="col-md-4">
@@ -339,7 +340,7 @@ https://templatemo.com/tm-545-finance-business
             <i class="fa fa-envelope"></i>
             <h4>Email</h4>
             <p>You can also email us on</p>
-            <a href="#">badgujar94h@gmail.com</a>
+            <a href="mailto:thesocialbeez.in@gmail.com">thesocialbeez.in@gmail.com</a>
           </div>
         </div>
         <div class="col-md-4">
@@ -347,7 +348,7 @@ https://templatemo.com/tm-545-finance-business
             <i class="fa fa-map-marker"></i>
             <h4>Location</h4>
             <p>Badlapur(w) 421 503</p>
-            <a href="#">View on Google Maps</a>
+            <a target="_blank" href="https://maps.app.goo.gl/ycmM2CoE2TgN922X8">View on Google Maps</a>
           </div>
         </div>
       </div>
