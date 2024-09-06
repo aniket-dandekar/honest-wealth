@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <title>Untitled Document</title>
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.1.css" type="text/css" />
+  <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+  <script src="js/jquery.mobile-1.4.1.js" type="text/javascript"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../../assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../../assets/css/honest-wealth.css">
+    <link rel="stylesheet" href="../../assets/css/owl.css">
+
+	<script type="text/javascript">
+
+		function getActive() {
+			if(document.getElementById('hide').style.display=='block') 
+			{	
+			document.getElementById('tab1').classList.add("cal-act");
+			}
+
+			if(document.getElementById('hide2').style.display=='block') 
+			{	
+			document.getElementById('tab2').classList.add("cal-act");
+			}
+
+			if(document.getElementById('benefits').style.display=='block') 
+			{	
+			document.getElementById('tab4').classList.add("cal-act");
+			}
+
+			if(document.getElementById('hide').style.display=='none') 
+			{	
+			document.getElementById('tab1').classList.remove("cal-act");
+			}
+
+			if(document.getElementById('hide2').style.display=='none') 
+			{	
+			document.getElementById('tab2').classList.remove("cal-act");
+			}
+
+			if(document.getElementById('benefits').style.display=='none') 
+			{	
+			document.getElementById('tab4').classList.remove("cal-act");
+			}
+		}
+		function Calculate() {
+			debugger;
+
+
+			//if(check==true) 
+			//{ 
+
+			document.getElementById('tab4').className = 'on1 col-sm-4  hw-tab-calc';
+			document.getElementById('tab1').className = 'off1 col-sm-4  hw-tab-calc';
+			document.getElementById('tab2').className = 'off1 col-sm-4  hw-tab-calc';
+			//document.getElementById('tab3').className='off1'; 
+			//			
+			//        } 
+
+			if (document.getElementById('hide2').style.display == 'block') {
+
+				document.getElementById('hide2').style.display = 'none';
+
+			}
+			if (document.getElementById('benefits').style.display == 'none') {
+
+				document.getElementById('benefits').style.display = 'block';
+
+			}
+
+			var Years = document.getElementById("Years").value;
+			var Cost = document.getElementById("Cost").value;
+			var goal = document.getElementById("Goalname").value;
+			var PV = document.getElementById("PV").value;
+			var inflation = document.getElementById("inflation").value;
+			var ror = document.getElementById("ror").value;
+
+
+			var Power = Math.pow((1 + (ror / 100)), Years);
+			var hike = Math.pow((1 + (inflation / 100)), Years);
+			var rounding = (Math.pow((1 + (ror / 100)), 1 / 12)) - 1;
+			var Powerr = Math.pow((1 + rounding), Years * 12);
+
+
+			var CostFV;
+			CostFV = Math.round((Cost * hike));
+
+			var FVexisting;
+			FVexisting = Math.round(PV * Power);
+
+			var FV;
+			FV = (CostFV - FVexisting);
+
+			var SIP;
+			SIP = Math.round((Math.round([(FV * rounding) / (Powerr - 1)])) / (1 + rounding));
+			document.getElementById('Goal_display').innerHTML = goal;
+			document.getElementById('Years_display').innerHTML = Years;
+			document.getElementById('Cost_display').innerHTML = CostFV;
+			document.getElementById('FVexisting_display').innerHTML = FVexisting;
+			document.getElementById('SIP_display').innerHTML = SIP;
+			drawChart(FV, FVexisting, goal);
+
+		}
+
+		google.load("visualization", "1", { packages: ["corechart"] });
+		google.setOnLoadCallback(drawChart);
+		function drawChart(FV, FVexisting, goal) {
+
+
+			var numberschart;
+			numberschart = Number(FV);
+			var data = google.visualization.arrayToDataTable([
+				['Task', 'Hours per Day'],
+				['Shortfall', parseInt(numberschart)],
+				['Provision Made', parseInt(FVexisting)],
+
+			]);
+
+
+
+			var options = {
+				title: goal
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+			chart.draw(data, options);
+		}
+
+
+
+
+
+		function Nextpage() {
+			var x = document.getElementById("Goalname").value;
+			if (x == null || x == "") {
+				alert("Goal name must be filled out");
+				return false;
+			}
+
+			else if (document.getElementById('hide2').style.display == 'none') {
+				document.getElementById('hide2').style.display = 'block';
+				document.getElementById('hide').style.display = 'none';
+				/*document.getElementById('tab3').className='off1';*/
+				document.getElementById('tab1').className = 'off1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab2').className = 'on1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab4').className = 'off1 col-sm-4  hw-tab-calc';
+
+			}
+
+
+
+
+
+		}
+
+		function Nextpage2() {
+			if (document.getElementById('benefits').style.display == 'none') {
+				document.getElementById('benefits').style.display = 'block';
+				document.getElementById('tab4').className = 'on1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab1').className = 'off1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab2').className = 'off1 col-sm-4  hw-tab-calc';
+				/*document.getElementById('tab3').className='off1';*/
+
+			}
+
+			if (document.getElementById('hide2').style.display == 'block') {
+
+				document.getElementById('hide2').style.display = 'none';
+
+			}
+
+		}
+
+		function backpage() {
+			if (document.getElementById('hide').style.display == 'none') {
+				document.getElementById('hide').style.display = 'block';
+				/*document.getElementById('tab3').className='off1';*/
+				document.getElementById('tab1').className = 'on1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab2').className = 'off1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab4').className = 'off1 col-sm-4  hw-tab-calc';
+
+			}
+
+			if (document.getElementById('hide2').style.display == 'block') {
+
+				document.getElementById('hide2').style.display = 'none';
+
+			}
+
+			if (document.getElementById('benefits').style.display == 'block') {
+
+document.getElementById('benefits').style.display = 'none';
+
+}
+
+		}
+
+		function backpage2() {
+			if (document.getElementById('hide2').style.display == 'none') {
+				document.getElementById('hide2').style.display = 'block';
+				/*	document.getElementById('tab3').className='off1';*/
+				document.getElementById('tab1').className = 'off1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab2').className = 'on1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab4').className = 'off1 col-sm-4  hw-tab-calc';
+
+			}
+
+			if (document.getElementById('benefits').style.display == 'block') {
+
+				document.getElementById('benefits').style.display = 'none';
+
+			}
+
+		}
+
+
+		function backpage33() {
+
+			if (document.getElementById('hide2').style.display == 'none') {
+				document.getElementById('hide2').style.display = 'block';
+				document.getElementById('tab2').className = 'on1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab1').className = 'off1 col-sm-4  hw-tab-calc';
+					document.getElementById('tab4').className='off1';
+				document.getElementById('benefits').style.display = 'none';
+
+			}
+
+			if (document.getElementById('benefits').style.display == 'block') {
+
+				document.getElementById('benefits').style.display = 'none';
+
+			}
+
+		}
+
+
+		function backpage43() {
+
+			if (document.getElementById('hide2').style.display == 'none') {
+				document.getElementById('hide2').style.display = 'block';
+				document.getElementById('tab2').className = 'on1 col-sm-4  hw-tab-calc';
+				document.getElementById('tab1').className = 'off1 col-sm-4  hw-tab-calc';
+					document.getElementById('tab1').className='off1 col-sm-4 hw-tab-calc';
+				document.getElementById('benefits').style.display = 'none';
+
+			}
+
+			if (document.getElementById('benefits').style.display == 'block') {
+
+				document.getElementById('benefits').style.display = 'none';
+
+			}
+
+
+			if (document.getElementById('hide').style.display == 'block') {
+
+				document.getElementById('hide').style.display = 'none';
+
+			}
+
+
+
+		}
+
+	</script>
+
+
+	<script>
+
+		$(document).ready(function () {
+			$('#tab1').click(function () {
+				$('#benefits').hide();
+			});
+
+			$('#tab2').click(function () {
+				$('#tab4').addClass('off1');
+			});
+
+
+		});
+
+	</script>
+
+</head>
+
+<body>
+
+
+	<div class="container" id="hw-calc">
+		<div class="row header">
+			<div class="on1 col-sm-4 hw-tab-calc" id="tab1" onclick="backpage();getActive()">
+				<script>document.getElementById('tab1').classList.add("cal-act");</script>
+				<p>Step 1</p>
+			</div>
+			<div class="off1 col-sm-4 hw-tab-calc" id="tab2" onclick="backpage43();getActive()">
+				<p>Step 2</p>
+			</div>
+		
+			<div class="off1 col-sm-4 hw-tab-calc" id="tab4">
+				<p>Solutions</p>
+			</div>
+		</div>
+	<br>
+		<div id="hide" class="" style="display:block;">
+			<div class="row">
+				<div class="col-sm-8">
+					Name your goal ?
+				</div>
+				<div class="col-sm-4">
+					<input type="text" id="Goalname" class="txt-calc form-control" required="required" />
+				</div>
+			</div>
+	
+			<label for="slider-fill" class="hide-items">If you were to achieve this goal today, how much money would you spend ?</label>
+	
+			<div class="row">
+				<div class="col-sm-9">
+					<input type="range" name="slider-fill" id="Cost" value="0" min="100000" max="3000000" step="100000" data-highlight="true" class="hide-items hide-range">
+				</div>
+				<div class="col-sm-3">
+				  <input type="number" class="txt-calc form-control" name="" id="Cost-txt">
+				</div>
+			</div>
+	
+			
+	
+	
+			<label for="slider-fill" class="hide-items">In how many years from now do you want to fulfil this goal ?</label>
+	
+			<div class="row">
+				<div class="col-sm-9">
+					<input type="range" name="slider-fill" id="Years" value="10" min="1" max="30" step="1" data-highlight="true" class="hide-items hide-range">
+				</div>
+				<div class="col-sm-3">
+				  <input type="number" class="txt-calc form-control" name="" id="Years-txt">
+				</div>
+			</div>
+	
+			
+	
+	
+	
+			<div class="button hw-tab-calc hide-items" id="nxt-btn" onclick="Nextpage();getActive()"><p>Next</p></div>
+	
+	
+		</div>
+	
+		<div id="hide2" class="" style="display:none;">
+			<label for="slider-fill" class="hide-items">How much money can you set aside towards this goal at the moment ?</label>
+	
+			<div class="row">
+				<div class="col-sm-9">
+					<input type="range" name="slider-fill" id="PV" value="0" min="0" max="3000000" step="100000" data-highlight="true" class="hide-items hide-range">
+				</div>
+				<div class="col-sm-3">
+				  <input type="number" class="txt-calc form-control" name="" id="PV-txt">
+				</div>
+			</div>
+	
+			
+	
+			
+			<label for="slider-fill" class="hide-items">Inflation Rate</label>
+	
+			<div class="row">
+				<div class="col-sm-9">
+					<input type="range" name="slider-fill" id="inflation" value="7" min="0" max="20" step="1" data-highlight="true" class="hide-items hide-range">
+				</div>
+				<div class="col-sm-3">
+				  <input type="number" class="txt-calc form-control" name="" id="inflation-txt">
+				</div>
+			</div>
+	
+			
+	
+	
+			<label for="slider-fill" class="hide-items">Rate Of Return</label>
+	
+			<div class="row">
+				<div class="col-sm-9">
+					<input type="range" name="slider-fill" id="ror" value="9" min="0" max="60" step="1" data-highlight="true" class="hide-items hide-range">
+				</div>
+				<div class="col-sm-3">
+				  <input type="number" class="txt-calc form-control" name="" id="ror-txt">
+				</div>
+			</div>	
+
+
+				<input type='submit' value='Calculate' class='form_button hide-items' onclick="Calculate();getActive()">
+				<span id='phpfmg_processing' style='display:none;'>
+					<img id='phpfmg_processing_gif' src='admin.php?mod=image&amp;func=processing' border=0
+						alt='Processing...'> <label id='phpfmg_processing_dots'></label>
+				</span>
+		</div>
+	
+		<div id="benefits" class="" style="display:none;">
+			<div class="col-md-5 col-xs-12">
+				Goal Name : <span style="font-size:18px; font-weight:600;" id="Goal_display"></span>
+				<hr color="#C1C1C1" />
+				Years Left : <span id="Years_display"></span> Years
+				<hr color="#C1C1C1" />
+				Cost In Future terms : Rs.<span id="Cost_display"></span>
+				<hr color="#C1C1C1" />
+				Existing Investment : Rs.<span id="FVexisting_display"></span>
+				<hr color="#C1C1C1" />
+				Monthly Savings From Now : Rs.<span id="SIP_display"
+					style="color:#030; font-size:20px; font-weight:bold;"></span>
+				<!-- <div class="button" onclick="backpage33()">Back</div> -->
+			</div>
+	
+			<div class="col-md-7 col-xs-12">
+				<div id="piechart" class="piechart"></div>
+			</div>
+	
+		</div>
+	</div>
+
+
+<script>
+	var slider_Years = document.getElementById("Years");
+	var output_Years = document.getElementById("Years-txt");
+	output_Years.value = slider_Years.value;
+	slider_Years.oninput = function () {
+		output_Years.value = this.value;
+	}
+
+	var slider_Cost = document.getElementById("Cost");
+	var output_Cost = document.getElementById("Cost-txt");
+	output_Cost.value = slider_Cost.value;
+	slider_Cost.oninput = function () {
+		output_Cost.value = this.value;
+	}
+
+	var slider_PV = document.getElementById("PV");
+	var output_PV = document.getElementById("PV-txt");
+	output_PV.value = slider_PV.value;
+	slider_PV.oninput = function () {
+		output_PV.value = this.value;
+	}
+
+	var slider_inflation = document.getElementById("inflation");
+	var output_inflation = document.getElementById("inflation-txt");
+	output_inflation.value = slider_inflation.value;
+	slider_inflation.oninput = function () {
+		output_inflation.value = this.value;
+	}
+
+	var slider_ror = document.getElementById("ror");
+	var output_ror = document.getElementById("ror-txt");
+	output_ror.value = slider_ror.value;
+	slider_ror.oninput = function () {
+		output_ror.value = this.value;
+	}
+</script>
+
+</body>
+
+</html>
